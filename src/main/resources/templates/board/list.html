@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layout/defaultLayout :: layout('게시판 목록', ~{::#contents}, ~{::#script})}">
+<body>
+	<div id="contents">	
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color: #8f7fa9">
+			<div class="container">
+				<a class="navbar-brand" href="#">
+					<img th:src="@{/images/bootstrap-solid.svg}" width="30" height="30" class="d-inline-block align-top" alt="">
+				게시판</a>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="container">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col" style="width: 10%; text-align: center;">번호</th>
+						<th scope="col" style="width: 15%; text-align: center;">서비스분류</th>
+						<th scope="col" style="text-align: center;">제목</th>
+						<th scope="col" style="width: 18%; text-align: center;">작성 날짜</th>
+						<th scope="col" style="width: 18%; text-align: center;">수정 날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="board : ${boardList}">
+						<th scope="row" th:text="${board.idx}" style="text-align: center;"></th>
+						<td th:text="${board.boardType.value}" style="text-align: center;"></td>
+						<td th:text="${board.title}"></td>
+						<td th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}" style="text-align: center;"></td>
+						<td th:text="${#temporals.format(board.updatedDate, 'yyyy-MM-dd HH:mm')}" style="text-align: center;"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center" th:with="startNumber=${T(Math).floor(boardList.number/5)} * 5 + 1,
+				endNumber=(${boardList.totalPages} > ${startNumber} + 4) ? ${startNumber} + 4 : ${boardList.totalPages}">
+					<li class="page-item"><a class="page-link" href="/board/list?page=1">&laquo;</a></li>
+					<li class="page-item" th:style="${boardList.first} ? 'display:none'"><a class="page-link" th:href="@{/board/list(page=${boardList.number})}">&lsaquo;</a></li>
+					<li class="page-item" th:each="page :${#numbers.sequence(startNumber, endNumber)}"
+						th:classappend="(${page} == ${boardList.number} + 1) ? 'active'">
+						<a class="page-link" th:href="@{/board/list(page=${page})}" th:text="${page}">
+						<span class="sr-only">(current)</span></a></li>
+					<li class="page-item" th:style="${boardList.last} ? 'display:none'"><a class="page-link" th:href="@{/board/list(page=${boardList.number} + 2)}">&rsaquo;</a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/board/list(page=${boardList.totalPages})}">&raquo;</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<div id="script"></div>
+</body>
+</html>
