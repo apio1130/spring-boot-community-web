@@ -36,8 +36,8 @@ public class SpringBootCommunityWebApplication {
 					.title("게시글" + idx)
 					.content("컨텐츠")
 					.boardType(BoardType.free)
-					.createdDate(LocalDateTime.now())
-					.updatedDate(LocalDateTime.now())
+					.createdDate(LocalDateTime.now().minusYears(1L).plusDays(idx))
+					.updatedDate(LocalDateTime.now().minusYears(1L).plusDays(idx))
 					.user(user)
 					.build()));
 		};
