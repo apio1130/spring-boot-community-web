@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content, contentScript)" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${title}">Layout Title</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/images/favicon.ico">
+    <th:block th:include="~{common/cmCss :: commonCss}"></th:block>
+</head>
+<body>
+<th:block th:include="${content}"></th:block>
+<th:block th:include="~{common/cmScript :: commonScript}"></th:block>
+<th:block th:include="${contentScript}"></th:block>
+</body>
+</html>
