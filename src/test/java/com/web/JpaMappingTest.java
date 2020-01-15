@@ -38,7 +38,7 @@ class JpaMappingTest {
 		boardRepository.save(Board.builder()
 				.title(boardTestTitle)
 				.content("컨텐츠")
-				.boardType(BoardType.free)
+				.boardType(BoardType.FREE)
 				.createdDate(LocalDateTime.now())
 				.updatedDate(LocalDateTime.now())
 				.user(user)
@@ -56,7 +56,7 @@ class JpaMappingTest {
 		Board board = boardRepository.findByUser(user);
 		assertEquals(board.getTitle(), boardTestTitle);
 		assertEquals(board.getContent(), "컨텐츠");
-		assertEquals(board.getBoardType(), BoardType.free);
+		assertEquals(board.getBoardType(), BoardType.FREE);
 		
 	}
 
