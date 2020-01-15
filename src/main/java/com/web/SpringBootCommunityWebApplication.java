@@ -35,7 +35,7 @@ public class SpringBootCommunityWebApplication {
 			IntStream.range(1, 200).forEach(idx -> boardRepository.save(Board.builder()
 					.title("게시글" + idx)
 					.content("컨텐츠")
-					.boardType(BoardType.free)
+					.boardType(BoardType.FREE)
 					.createdDate(LocalDateTime.now().minusYears(1L).plusDays(idx))
 					.updatedDate(LocalDateTime.now().minusYears(1L).plusDays(idx))
 					.user(user)

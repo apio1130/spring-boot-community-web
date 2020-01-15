@@ -1,7 +1,7 @@
 package com.web.domain.enums;
 
 public enum BoardType {
-	notice("공지사항"), free("자유게시판");
+	NOTICE("공지사항"), FREE("자유게시판");
 
 	private String value;
 
