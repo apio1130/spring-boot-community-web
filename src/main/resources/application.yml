@@ -12,7 +12,7 @@ logging:  level:    com.web: DEBUG
 spring:
   profiles: local
 server:
-  port: 8090  
+  port: 8080  
 ---
 spring:
   profiles: prd
