@@ -6,9 +6,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.domain.Board;
 import com.web.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,20 +19,30 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board")
 public class BoardController {
 
+	private static final String VIEW_BOARD_FORM = "/board/form";
+	private static final String VIEW_BOARD_LIST = "/board/list";
+
 	@Autowired
 	private BoardService boardService;
 
-	@GetMapping({ "", "/" })
-	public String board(@RequestParam(value = "idx", defaultValue = "0") Long idx, Model model ) {
-		model.addAttribute("board", boardService.findBoardByIdx(idx));
-		return "/board/form";
-	}
-	
-	@GetMapping("/list")
+	@GetMapping({ "", "/", "/list" })
 	public String list(@PageableDefault Pageable pageable, Model model) {
 		log.debug("pageable Info : {}", pageable.toString());
 		model.addAttribute("boardList", boardService.findBoardList(pageable));
-		return "/board/list";
+		return VIEW_BOARD_LIST;
+	}
+
+	@GetMapping("/{idx}")
+	public String boardDetail(@PathVariable("idx") Long idx, Model model) {
+		Board board = boardService.findBoardByIdx(idx);
+		log.debug("board Info : {}", board.toString());
+		model.addAttribute("board", board);
+		return VIEW_BOARD_FORM;
+	}
+
+	@GetMapping("/regist")
+	public String registBoard(Model model) {
+		return VIEW_BOARD_FORM;
 	}
 
 }
