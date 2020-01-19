@@ -19,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board")
 public class BoardController {
 
-	private static final String VIEW_BOARD_FORM = "/board/form";
-	private static final String VIEW_BOARD_LIST = "/board/list";
+	private static final String VIEW_BOARD_FORM = "board/form";
+	private static final String VIEW_BOARD_LIST = "board/list";
 
 	@Autowired
 	private BoardService boardService;
