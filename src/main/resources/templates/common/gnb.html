@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="gnb">
+	<div class="container">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #8f7fa9">
+			<div class="container">
+				<a class="navbar-brand" href="#">
+					<img th:src="@{/images/bootstrap-solid.svg}" width="30" height="30" class="d-inline-block align-top" alt="">
+				게시판</a>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>	
+</div>
