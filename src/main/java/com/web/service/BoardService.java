@@ -19,14 +19,15 @@ public class BoardService {
 	}
 
 	public Page<Board> findBoardList(Pageable pageable) {
-		pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1,
-				pageable.getPageSize(), Sort.by("idx").descending());
+		// pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize(), Sort.by("idx").descending());
+	    pageable = new PageRequest(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize());
 
 		return boardRepository.findAll(pageable);
 	}
 
 	public Board findBoardByIdx(Long idx) {
-		return boardRepository.findById(idx).orElse(new Board());
+		// return boardRepository.findById(idx).orElse(new Board());
+		return boardRepository.findOne(idx);
 	}
 
 }
