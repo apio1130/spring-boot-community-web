@@ -26,8 +26,8 @@
 			    btns[i].addEventListener('click', function(event){
 			        console.log(this);
 			        var socialType = this.getAttribute('data-social');
-			        console.log('/login/' + socialType);
-			        location.href = '/login/' + socialType;
+			        console.log('/oauth2/authorization/' + socialType);
+			        location.href = '/oauth2/authorization/' + socialType;
 			    });
 			};
 		})();

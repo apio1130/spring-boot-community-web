@@ -12,22 +12,21 @@ import com.web.repository.BoardRepository;
 @Service
 public class BoardService {
 
-	private BoardRepository boardRepository;
+    private BoardRepository boardRepository;
 
-	public BoardService(BoardRepository boardRepository) {
-		this.boardRepository = boardRepository;
-	}
+    public BoardService(BoardRepository boardRepository) {
+        this.boardRepository = boardRepository;
+    }
 
-	public Page<Board> findBoardList(Pageable pageable) {
-		// pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize(), Sort.by("idx").descending());
-	    pageable = new PageRequest(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize());
+    public Page<Board> findBoardList(Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1,
+                pageable.getPageSize(), Sort.by("idx").descending());
 
-		return boardRepository.findAll(pageable);
-	}
+        return boardRepository.findAll(pageable);
+    }
 
-	public Board findBoardByIdx(Long idx) {
-		// return boardRepository.findById(idx).orElse(new Board());
-		return boardRepository.findOne(idx);
-	}
+    public Board findBoardByIdx(Long idx) {
+        return boardRepository.findById(idx).orElse(new Board());
+    }
 
 }
